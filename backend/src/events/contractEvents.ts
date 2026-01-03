@@ -1,4 +1,4 @@
-import WebSocket from 'ws';
+import WebSocket, { type RawData } from 'ws';
 import { config } from '../config/config';
 import { prisma } from '../db/prisma';
 import { logger } from '../utils/logger';
@@ -48,7 +48,7 @@ export function startContractEventStream(): void {
     logger.info({ url }, 'events.ws.open');
   });
 
-  ws.on('message', async (data) => {
+  ws.on('message', async (data: RawData) => {
     const text = typeof data === 'string' ? data : data.toString('utf8');
     if (text === 'Ping' || text === 'Pong') return;
     try {
@@ -93,11 +93,11 @@ export function startContractEventStream(): void {
     }
   });
 
-  ws.on('error', (error) => {
-    logger.error({ error: (error as Error).message }, 'events.ws.error');
+  ws.on('error', (error: Error) => {
+    logger.error({ error: error.message }, 'events.ws.error');
   });
 
-  ws.on('close', (code, reason) => {
+  ws.on('close', (code: number, reason: Buffer) => {
     logger.warn({ code, reason: reason.toString() }, 'events.ws.closed');
     scheduleReconnect();
   });
