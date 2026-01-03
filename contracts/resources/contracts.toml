@@ -1,0 +1,9 @@
+last_updated = "2025-12-31T16:52:47Z"
+
+[[contracts]]
+name = "MarketRegistry"
+package_hash = "hash-3c3fb5cf5bd1fb09b704f360560ed6381e85ab19e895f754e55d36231b5e8458"
+
+[[contracts]]
+name = "PriceOracle"
+package_hash = "hash-896bcc45f1b91c9818af8c2273e25a948ffa84c6ab772027ccfff16d33b6f563"

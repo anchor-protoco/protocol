@@ -1,0 +1,14 @@
+[[contracts]]
+fqn = "flipper::Flipper"
+
+[[contracts]]
+fqn = "market_registry::MarketRegistry"
+
+[[contracts]]
+fqn = "lending_market::LendingMarket"
+
+[[contracts]]
+fqn = "price_oracle::PriceOracle"
+
+[[contracts]]
+fqn = "a_token::AToken"

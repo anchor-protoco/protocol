@@ -1,0 +1,219 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model OraclePrice {
+  id        String   @id @default(cuid())
+  asset     String
+  priceWad  String
+  source    String
+  createdAt DateTime @default(now())
+
+  @@index([asset, createdAt])
+}
+
+model PriceUpdateEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  asset               String
+  priceWad            String
+  eventTimestamp      BigInt?
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+  @@index([asset, createdAt])
+}
+
+model MarketRegisteredEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  asset               String
+  market              String
+  aToken              String
+  oracle              String
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+}
+
+model MarketMetadata {
+  id          String   @id @default(cuid())
+  asset       String   @unique
+  name        String
+  symbol      String
+  decimals    Int
+  logoUrl     String?
+  description String?
+  websiteUrl  String?
+  coingeckoId String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([asset])
+}
+
+model MarketActiveUpdatedEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  asset               String
+  isActive            Boolean
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+  @@index([asset, createdAt])
+}
+
+model PauseFlagsUpdatedEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  asset               String
+  supplyPaused        Boolean
+  borrowPaused        Boolean
+  withdrawPaused      Boolean
+  repayPaused         Boolean
+  liquidationPaused   Boolean
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+  @@index([asset, createdAt])
+}
+
+model RateModelUpdatedEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  baseRatePerSec      String
+  slopeRatePerSec     String
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+}
+
+model RiskParamsUpdatedEvent {
+  id                    String   @id @default(cuid())
+  contractPackageHash   String
+  collateralFactor      String
+  liquidationThreshold  String
+  closeFactor           String
+  liquidationBonus      String
+  reserveFactor         String
+  borrowCap             String
+  supplyCap             String
+  deployHash            String
+  blockHash             String
+  createdAt             DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+}
+
+model MarketStateUpdatedEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  cash                String
+  totalBorrows         String
+  totalReserves        String
+  supplyIndex         String
+  borrowIndex         String
+  utilization         String
+  supplyRatePerSec    String
+  borrowRatePerSec    String
+  eventTimestamp      BigInt?
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+}
+
+model DepositEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  account             String
+  amount              String
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+  @@index([account, createdAt])
+}
+
+model WithdrawEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  account             String
+  amount              String
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+  @@index([account, createdAt])
+}
+
+model BorrowEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  account             String
+  amount              String
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+  @@index([account, createdAt])
+}
+
+model RepayEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  account             String
+  amount              String
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+  @@index([account, createdAt])
+}
+
+model LiquidateEvent {
+  id                  String   @id @default(cuid())
+  contractPackageHash String
+  borrower            String
+  liquidator          String
+  repayAmount         String
+  seizeAmount         String
+  deployHash          String
+  blockHash           String
+  createdAt           DateTime @default(now())
+
+  @@index([contractPackageHash, createdAt])
+  @@index([borrower, createdAt])
+  @@index([liquidator, createdAt])
+}
+
+model ContractEvent {
+  id          String   @id @default(cuid())
+  contract    String
+  eventType   String
+  payloadJson String
+  blockHash   String
+  deployHash  String
+  createdAt   DateTime @default(now())
+
+  @@index([contract, createdAt])
+}
