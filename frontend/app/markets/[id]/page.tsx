@@ -4,7 +4,7 @@ import Link from "next/link"
 import { MarketDetailsClient } from "./market-details-client"
 
 async function fetchMarketSummary(asset: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000"
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://protocol-9r9q.onrender.com"
   const response = await fetch(`${baseUrl}/api/v1/markets/asset/${asset}/summary`, {
     next: { revalidate: 15 },
   })

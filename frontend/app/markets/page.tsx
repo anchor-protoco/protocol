@@ -1,7 +1,7 @@
 import { MarketsClient } from "./markets-client"
 
 async function fetchMarketSummaries() {
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:4000"
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://protocol-9r9q.onrender.com"
   const response = await fetch(`${baseUrl}/api/v1/markets/summary`, {
     next: { revalidate: 10 },
   })
