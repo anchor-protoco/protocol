@@ -9,7 +9,13 @@ export interface CoinGeckoPrice {
 export async function fetchCoinGeckoPrice(id: string): Promise<CoinGeckoPrice> {
   const url = `${config.COINGECKO_BASE_URL}/simple/price?ids=${id}&vs_currencies=usd`;
   return withRetry(async () => {
-    const res = await fetch(url);
+    //const res = await fetch(url);
+    const res = await fetch(url, {
+      headers: {
+        'x-cg-demo-api-key': 'CG-TtQgZX9c9RkAnBQLmcwJhzLd', //config.COINGECKO_API_KEY,
+        'User-Agent': 'LendingOracle/1.0',
+      },
+    });
     if (!res.ok) {
       throw new Error(`CoinGecko error ${res.status}`);
     }
