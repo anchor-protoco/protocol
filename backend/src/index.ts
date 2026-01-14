@@ -36,7 +36,7 @@ app.use('/api/v1/token', tokenRoutes);
 app.use(errorHandler);
 
 startContractEventStream();
-startOracleScheduler();
+///startOracleScheduler();
 
 app.listen(config.PORT, () => {
   // eslint-disable-next-line no-console
